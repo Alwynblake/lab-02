@@ -25,7 +25,7 @@ Horns.readJson=()=>{
       })
     })
 
-    .then (Horns.loadHorns).then(imgselect)
+    .then (Horns.loadHorns).then(Horns.imgselect)
 
 };
 
@@ -51,7 +51,7 @@ Horns.prototype.render=function(){
 
 }
 
-function imgselect(){
+Horns.imgselect=function(){
 
   let newarr=[];
   Horns.allHorns.forEach(item=>{
@@ -59,29 +59,32 @@ function imgselect(){
     if(!newarr.includes(item.keyword)){
 
       $('select').append('<option class="clone"></option>');
-      let $opt=$('option[class="clone"]');
-      $opt.text(item.keyword);
+      let opt=$('option[class="clone"]');
+      opt.text(item.keyword);
       newarr.push(item.keyword);
-      $opt.attr('class','');
+      opt.removeClass('clone');
     }
-
-
   })
 
-
-
 }
+
 
 $('select').on('change',popimg);
 function popimg(){
 
   let selecteditem=$(this).val();
-  $('div').not('.'+selecteditem).fadeOut();
-  $('.'+selecteditem).fadeIn();
+
+  //   $('div').not('.'+selecteditem).hide();
+
+  //   $('.'+selecteditem).show();
+  $('div').show();
+  if(selecteditem!==''){
+    $('div').not('[class*="'+selecteditem+'"]').hide();
+  }
+
+
 
 }
-
-
 
 
 $(()=>Horns.readJson());
