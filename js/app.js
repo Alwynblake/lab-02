@@ -25,7 +25,7 @@ Horns.readJson=()=>{
       })
     })
 
-    .then (Horns.loadHorns)
+    .then (Horns.loadHorns).then(imgselect)
 
 };
 
@@ -36,8 +36,8 @@ Horns.loadHorns=()=>
 
 Horns.prototype.render=function(){
 
-  $('main').append('<section class="clone"></section>');
-  let hornClone=$('section[class="clone"]');
+  $('main').append('<div class="clone"></div>');
+  let hornClone=$('div[class="clone"]');
   let hornHtml=$('#photo-template').html();
   hornClone.html(hornHtml);
 
@@ -51,6 +51,35 @@ Horns.prototype.render=function(){
 
 }
 
+function imgselect(){
+
+  let newarr=[];
+  Horns.allHorns.forEach(item=>{
+
+    if(!newarr.includes(item.keyword)){
+
+      $('select').append('<option class="clone"></option>');
+      let $opt=$('option[class="clone"]');
+      $opt.text(item.keyword);
+      newarr.push(item.keyword);
+      $opt.attr('class','');
+    }
+
+
+  })
+
+
+
+}
+
+$('select').on('change',popimg);
+function popimg(){
+
+  let selecteditem=$(this).val();
+  $('div').not('.'+selecteditem).fadeOut();
+  $('.'+selecteditem).fadeIn();
+
+}
 
 
 
