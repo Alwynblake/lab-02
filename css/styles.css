@@ -1,0 +1,19 @@
+
+
+
+img {
+    width: 430px;
+    height: 430px;
+    margin: 20px;
+    border: 3px solid black;
+    object-fit: contain;
+  
+  }
+
+
+  section{
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
