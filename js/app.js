@@ -1,5 +1,8 @@
 'use strict';
 
+
+
+
 function Horns(horn){
 
   this.image_url=horn.image_url;
@@ -10,13 +13,22 @@ function Horns(horn){
 
 }
 
-
 Horns.allHorns=[];
 
+Horns.prototype.toHtml=function(){
 
-Horns.readJson=()=>{
+  const $template=$('#horn-template').html();
 
-  $.get('./data/page-1.json','json')
+  const $source=Handlebars.compile($template);
+
+  return $source(this);
+
+}
+
+
+Horns.readJson=(filename)=>{
+  Horns.allHorns=[];
+  $.get(filename,'json')
 
     .then(data=>{
 
@@ -30,26 +42,8 @@ Horns.readJson=()=>{
 };
 
 Horns.loadHorns=()=>
-  Horns.allHorns.forEach(horn=>(horn.render()));
+  Horns.allHorns.forEach(horn=>{$('#photo-template').append(horn.toHtml())});
 
-
-
-Horns.prototype.render=function(){
-
-  $('main').append('<div class="clone"></div>');
-  let hornClone=$('div[class="clone"]');
-  let hornHtml=$('#photo-template').html();
-  hornClone.html(hornHtml);
-
-  hornClone.find('h2').text(this.title);
-  hornClone.find('img').attr('src',this.image_url);
-  hornClone.find('p').text(this.description);
-  hornClone.find('p').text(this.keyword);
-  hornClone.find('p').text(this.horns);
-  hornClone.removeClass('clone');
-  hornClone.attr('class',this.keyword);
-
-}
 
 Horns.imgselect=function(){
 
@@ -68,23 +62,62 @@ Horns.imgselect=function(){
 
 }
 
+Horns.prototype.render=function(){
 
-$('select').on('change',popimg);
-function popimg(){
+  $('main').append('<div class="clone"></div>');
+  let hornClone=$('div[class="clone"]');
+  let hornHtml=$('#photo-template').html();
+  hornClone.html(hornHtml);
 
-  let selecteditem=$(this).val();
-
-  //   $('div').not('.'+selecteditem).hide();
-
-  //   $('.'+selecteditem).show();
-  $('div').show();
-  if(selecteditem!==''){
-    $('div').not('[class*="'+selecteditem+'"]').hide();
-  }
-
-
+  hornClone.find('h2').text(this.title);
+  hornClone.find('img').attr('src',this.image_url);
+  hornClone.find('p').text(this.description);
+  hornClone.find('p').text(this.keyword);
+  hornClone.find('p').text(this.horns);
+  hornClone.removeClass('clone');
+  hornClone.attr('class',this.keyword);
 
 }
 
 
-$(()=>Horns.readJson());
+
+
+$('select').on('change',popimg);
+function popimg(){
+  $('div').remove();
+  let selecteditem=$(this).val();
+
+  Horns.allHorns.forEach(item=>{
+
+    if (selecteditem===item.keyword){
+    item.render();
+    }
+
+  });
+
+}
+
+
+
+
+
+$('#one').on('click', function(){
+
+  $('div').remove();
+  $('option').remove();
+  $(()=>Horns.readJson('./data/page-1.json'));
+
+});
+
+
+$('#two').on('click', function(){
+
+  $('div').remove();
+  $('option').remove();
+  $(()=>Horns.readJson('./data/page-2.json'));
+
+});
+
+
+
+$(()=>Horns.readJson('./data/page-1.json'));
