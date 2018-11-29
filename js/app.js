@@ -90,13 +90,45 @@ function popimg(){
   Horns.allHorns.forEach(item=>{
 
     if (selecteditem===item.keyword){
-    item.render();
+      item.render();
     }
 
   });
 
 }
 
+
+$('#sortnumber').on('change', function(){
+
+  $('div').remove();
+
+  Horns.allHorns.sort((a,b)=>a.horns-b.horns);
+
+  Horns.loadHorns();
+
+});
+
+$('#sorttitle').on('change',function(){
+
+  $('div').remove();
+  Horns.allHorns.sort((a,b)=>{
+
+
+    a=a.title.toUpperCase();
+    b=b.title.toUpperCase();
+    if(a<b){
+      return -1;}
+    else if(a>b){
+      return 1;
+    }
+    else return 0;
+
+
+  });
+  Horns.loadHorns();
+
+
+});
 
 
 
