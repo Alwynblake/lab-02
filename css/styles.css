@@ -1,5 +1,10 @@
+*{
+  box-sizing: border-box;
+}
+body {
 
-
+  background-color: rgb(247, 140, 200);
+}
 header h1 { font-size: 70px;
   text-align: center;
   color: rgb(46, 115, 245);
@@ -12,35 +17,60 @@ h2{
   font-family: 'Berkshire Swash', cursive;
 
 }
-body {
+/* p{
+  width:150px;
+  height:auto;
 
-  background-color: rgb(247, 140, 200);
+} */
+
+#one{
+margin-top:50px;
+margin-left:500px;
+
 }
+section #idontknow{
 
-aside, section article, div{
+  flex-direction: row;
+  display: flex; 
+  justify-content: center;
+  flex-wrap: wrap;
+}
+ 
+
+#photo-template{
+  margin-top:80px;
+  flex-direction: row;
+  display: flex; 
+  justify-content: center;
+  flex-wrap: wrap;
+}
+ 
+ 
+
+div{
+ 
+  width:250px;
   box-sizing: border-box;
   outline: 0.5px solid #000000;
-  text-align: center;
+  text-align: center; 
   background-color: none;
-  border-collapse: collapse;
-  float: left;
+  /* border-collapse: collapse; */
+  justify-content: center;
+ 
+
 }
 
 img {
-    width: 230px;
-    height: 230px;
+    width: 130px;
+    height: 100px;
     margin: 20px;
-    border: 3px solid black;
-    object-fit: contain;
-      
-  }
+}
+    /* border: 3px solid black; */
+    /* object-fit: contain; */
+  
+   
 
-
-  section{
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
+  
 
   footer {
     margin-top: 20px;

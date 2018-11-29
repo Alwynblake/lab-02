@@ -64,9 +64,9 @@ Horns.imgselect=function(){
 
 Horns.prototype.render=function(){
 
-  $('main').append('<div class="clone"></div>');
+  $('#photo-template').append('<div class="clone"></div>');
   let hornClone=$('div[class="clone"]');
-  let hornHtml=$('#photo-template').html();
+  let hornHtml=$('#idontknow').html();
   hornClone.html(hornHtml);
 
   hornClone.find('h2').text(this.title);
@@ -91,6 +91,7 @@ function popimg(){
 
     if (selecteditem===item.keyword){
       item.render();
+    
     }
 
   });
